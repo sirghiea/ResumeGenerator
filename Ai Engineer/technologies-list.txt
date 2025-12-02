@@ -1,0 +1,63 @@
+TECHNOLOGIES LIST FROM AI-Engineer-python-template-to-edit.txt
+================================================================================
+
+FRONTEND TECHNOLOGIES:
+- React
+- JavaScript
+- TypeScript
+
+BACKEND TECHNOLOGIES:
+- Python
+- Node.js
+- Java
+- .NET
+
+PYTHON FRAMEWORKS:
+- FastAPI
+- Flask (listed as "Flusk" in template)
+
+CLOUD PLATFORMS & SERVICES:
+- Azure
+- Azure Functions
+- Azure ML
+- AWS (Amazon Web Services)
+
+DATABASE & CACHING:
+- Redis
+- OpenSearch
+
+AI/ML TECHNOLOGIES:
+- RAG (Retrieval-Augmented Generation)
+- Azure ML
+- AI-driven solutions
+
+ARCHITECTURE & PATTERNS:
+- Microservices
+- Cloud-native microservices
+- .NET microservices
+
+DEVOPS & TOOLS:
+- Jenkins
+- Docker
+- Git
+
+METHODOLOGIES:
+- Agile
+
+ADDITIONAL TECHNOLOGIES MENTIONED:
+- Real-time monitoring
+- Real-time profiling
+- Dynamic ranking
+- Scalable data services
+- AI-driven behavior monitoring
+- AI-driven identity checks
+- AI-driven risk scoring
+- AI-driven personalization
+- End-to-end web applications
+- Responsive React front-ends
+- Node.js/Python APIs
+
+================================================================================
+TOTAL UNIQUE TECHNOLOGIES: 25+
+================================================================================
+

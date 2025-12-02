@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script
+      src="https://kit.fontawesome.com/9c152504ee.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="config.js" type="text/javascript"></script>
+    <script
+      src="Ai Engineer/technologies-metadata.js"
+      type="text/javascript"
+    ></script>
+    <script type="text/javascript">
+      // here is the code for generating the CV
+      var totalExp;
+      var companies = new Map();
+      var skills = new Map();
+      // function to calculate duration from 2 project dates
+      function calculateDuration(startDate, endDate) {
+        if (
+          startDate.year > endDate.year ||
+          (startDate.year == endDate.year && startDate.month > endDate.month)
+        ) {
+          alert("Check console");
+          throw new Error(
+            "Start date (" +
+              startDate.month +
+              "." +
+              startDate.year +
+              ") is after end date (" +
+              endDate.month +
+              "." +
+              endDate.year +
+              ")"
+          );
+        }
+
+        if (startDate.year == endDate.year) {
+          return endDate.month - startDate.month + 1;
+        }
+
+        return (
+          13 -
+          startDate.month +
+          (endDate.year - startDate.year - 1) * 12 +
+          endDate.month
+        );
+      }
+      // converts a project date to string
+      function projectDateToText(date) {
+        const months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+        return months[date.month - 1] + " " + date.year;
+      }
+      // converts skill duration to text
+      function durationToText(months, roundUpAt) {
+        numberOfYears = parseInt(months / 12);
+        if (months % 12 >= roundUpAt) {
+          numberOfYears++;
+        }
+
+        return numberOfYears + " year" + (numberOfYears > 1 ? "s" : "");
+      }
+      // function for checking if projects overlap
+      function checkOverlapingProjects() {
+        var intervals = [];
+        for (i = 0; i < cvConfig.experience.length; i++) {
+          startTime =
+            cvConfig.experience[i].period[0].year * 12 +
+            cvConfig.experience[i].period[0].month;
+          endTime =
+            cvConfig.experience[i].period[1].year * 12 +
+            cvConfig.experience[i].period[1].month;
+          intervals[intervals.length] = { time: startTime, type: 1, id: i };
+          intervals[intervals.length] = { time: endTime, type: -1, id: i };
+        }
+
+        intervals.sort(function (a, b) {
+          if (a.time < b.time) return -1;
+          if (a.time > b.time) return 1;
+          if (a.type == 1) return -1;
+          if (b.type == 1) return 1;
+          return 0;
+        });
+        var sum = 0;
+        for (i = 0; i < intervals.length; i++) {
+          sum += intervals[i].type;
+          if (sum > 1) {
+            alert("Check console");
+            throw new Error(
+              'Projects "' +
+                cvConfig.experience[intervals[i].id].project +
+                '" and "' +
+                cvConfig.experience[intervals[i - 1].id].project +
+                '" overlap'
+            );
+          }
+        }
+      }
+      function printContactDetails() {
+        // WhatsApp link
+        var whatsappNumber = cvConfig.contact.whatsapp.replaceAll(
+          /[\s\+]/g,
+          ""
+        );
+        var whatsappLink = document.querySelector(
+          ".shortInfo > #contact.shortInfoBlock > #whatsapp.contactDetails > span > a"
+        );
+        whatsappLink.textContent = cvConfig.contact.whatsapp;
+        whatsappLink.setAttribute("href", "https://wa.me/" + whatsappNumber);
+
+        // Telegram link
+        var telegramLink = document.querySelector(
+          ".shortInfo > #contact.shortInfoBlock > #telegram.contactDetails > span > a"
+        );
+        telegramLink.textContent = "@" + cvConfig.contact.telegram;
+        telegramLink.setAttribute(
+          "href",
+          "https://t.me/" + cvConfig.contact.telegram
+        );
+        document.querySelector(
+          ".shortInfo > #contact.shortInfoBlock > #email.contactDetails > span > a"
+        ).textContent = cvConfig.contact.email;
+        document
+          .querySelector(
+            ".shortInfo > #contact.shortInfoBlock > #email.contactDetails > span > a"
+          )
+          .setAttribute("href", "mailto:" + cvConfig.contact.email);
+        document.querySelector(
+          ".shortInfo > #contact.shortInfoBlock > #location.contactDetails > span"
+        ).textContent = cvConfig.contact.location;
+        document.querySelector(
+          ".shortInfo > #contact.shortInfoBlock > #linkedin.contactDetails > span > a"
+        ).textContent = cvConfig.contact.linkedin;
+        document
+          .querySelector(
+            ".shortInfo > #contact.shortInfoBlock > #linkedin.contactDetails > span > a"
+          )
+          .setAttribute(
+            "href",
+            "https://www.linkedin.com/" + cvConfig.contact.linkedin
+          );
+        // Medium link
+        var mediumLink = document.querySelector(
+          ".shortInfo > #contact.shortInfoBlock > #medium.contactDetails > span > a"
+        );
+        mediumLink.textContent = cvConfig.contact.medium;
+        mediumLink.setAttribute("href", cvConfig.contact.mediumLink);
+        // GitHub link
+        var githubLink = document.querySelector(
+          ".shortInfo > #contact.shortInfoBlock > #github.contactDetails > span > a"
+        );
+        githubLink.textContent = "@" + cvConfig.contact.github;
+        githubLink.setAttribute("href", cvConfig.contact.githubLink);
+        // I don't use Skype anymore, don't uncomment this
+        // document.querySelector(".shortInfo > #contact.shortInfoBlock > #skype.contactDetails > span > a").textContent = cvConfig.contact.skype;
+        // document.querySelector(".shortInfo > #contact.shortInfoBlock > #skype.contactDetails > span > a").setAttribute("href", cvConfig.contact.skypeLink);
+      }
+      function printSkills() {
+        container = document.querySelector(
+          ".shortInfo > #skills.shortInfoBlock"
+        );
+        for (var skill of cvConfig.skills) {
+          if (skill.type == "normal") {
+            container.innerHTML +=
+              '<div class="skillDetails"><div>' +
+              skill.name +
+              "</div><div>" +
+              durationToText(
+                skills.get(skill.name),
+                cvConfig.skillsYearsRoundAtMonths
+              ) +
+              "</div></div>";
+          } else if (skill.type == "custom") {
+            container.innerHTML +=
+              '<div class="skillDetails"><div>' +
+              skill.name +
+              "</div><div>" +
+              durationToText(
+                skill.years * 12,
+                cvConfig.skillsYearsRoundAtMonths
+              ) +
+              "</div></div>";
+          }
+        }
+      }
+      function printEducation() {
+        container = document.querySelector(
+          ".shortInfo > #education.shortInfoBlock"
+        );
+        for (var edu of cvConfig.education) {
+          var htmlToAppend = '<div class="educationDetails">';
+          htmlToAppend += "<div>" + edu.university + "</div>";
+          htmlToAppend += "<div>" + edu.degree + "</div>";
+          htmlToAppend += "<div>" + edu.locAndYears + "</div>";
+          htmlToAppend += "</div>";
+          container.innerHTML += htmlToAppend;
+        }
+      }
+      function printName() {
+        document.querySelector(".xp > #name.title").textContent = cvConfig.name;
+        document.querySelector("title").textContent = "CV - " + cvConfig.name;
+      }
+      function printTitle() {
+        var title = "";
+        var delimiter = " • ";
+        for (var t of cvConfig.title) {
+          title += t + delimiter;
+        }
+        document.querySelector(".xp > #expertise.subtitle").textContent =
+          title.substring(0, title.length - delimiter.length);
+      }
+      function printAboutMe() {
+        var container = document.querySelector(
+          ".xp > .content > #aboutMeSection"
+        );
+
+        for (var aboutMe of cvConfig.aboutMe) {
+          var htmlToAppend = '<div class="normalText">';
+          for (var line of aboutMe) {
+            if (line.type == "normal") {
+              htmlToAppend += line.content;
+            } else if (line.type == "bold") {
+              htmlToAppend += "<span>" + line.content + "</span>";
+            }
+          }
+          htmlToAppend += "</div>";
+          container.innerHTML += htmlToAppend;
+        }
+      }
+      function printProjects() {
+        var pageCount = 1;
+        var container = document.querySelector(".xp > .content > #projects");
+
+        for (var xp of cvConfig.experience) {
+          var projectHTML = "";
+          if (xp.pageBreak) {
+            projectHTML += '<div class="pageBreak"></div>';
+            pageCount++;
+          }
+          projectHTML += '<div class="project">';
+          projectHTML += '<div class="positionAndPeriod">';
+          projectHTML += "<span>" + xp.position + "</span>";
+          var endDateText = projectDateToText(xp.period[1]);
+          // Check if it's the current job (December 2024 or future date)
+          var currentDate = new Date();
+          var endDate = new Date(xp.period[1].year, xp.period[1].month - 1);
+          if (
+            endDate >= currentDate ||
+            (xp.period[1].year == 2024 && xp.period[1].month == 12)
+          ) {
+            endDateText = "To Present";
+          }
+          projectHTML +=
+            "<span>" +
+            projectDateToText(xp.period[0]) +
+            " - " +
+            endDateText +
+            "</span>";
+          projectHTML += "</div>";
+          projectHTML += '<div class="titleAndCompany">';
+          projectHTML += "<span>" + xp.project + "</span> | ";
+          projectHTML += "<span>" + xp.company + "</span>";
+          projectHTML += "</div>";
+          projectHTML += '<p class="description">' + xp.description + "</p>";
+          projectHTML += '<ul class="impact">';
+          for (var impact of xp.impact) {
+            projectHTML += "<li><p>";
+            for (var line of impact) {
+              if (line.type == "normal") {
+                projectHTML += line.text;
+              } else if (line.type == "bold") {
+                projectHTML += "<span>" + line.text + "</span>";
+              }
+            }
+            projectHTML += "</p></li>";
+          }
+          projectHTML += "</ul>";
+          projectHTML += '<p class="skills"><span>Skills:</span>';
+          var skillsText = "";
+          for (var skill of xp.skills) {
+            skillsText += " " + skill + ",";
+          }
+          projectHTML += skillsText.substring(0, skillsText.length - 1);
+          projectHTML += "</p>";
+          projectHTML += "</div>";
+
+          container.innerHTML += projectHTML;
+        }
+        document
+          .querySelector("body")
+          .setAttribute("style", "height: " + pageCount * 297 + "mm");
+        document
+          .querySelector("html")
+          .setAttribute("style", "height: " + pageCount * 297 + "mm");
+      }
+      function main() {
+        // print number of projects
+        console.log("Total number of projects: " + cvConfig.experience.length);
+        // calculate total experience and companies experience
+        totalExp = 0;
+        for (var xp of cvConfig.experience) {
+          projectDuration = calculateDuration(xp.period[0], xp.period[1]);
+          totalExp += projectDuration;
+          if (companies.has(xp.company) == true) {
+            companies.set(
+              xp.company,
+              companies.get(xp.company) + projectDuration
+            );
+          } else {
+            companies.set(xp.company, projectDuration);
+          }
+          for (var skill of xp.skills) {
+            if (skills.has(skill) == true) {
+              skills.set(skill, skills.get(skill) + projectDuration);
+            } else {
+              skills.set(skill, projectDuration);
+            }
+          }
+          for (var skill of xp.skillsHidden) {
+            if (skills.has(skill) == true) {
+              skills.set(skill, skills.get(skill) + projectDuration);
+            } else {
+              skills.set(skill, projectDuration);
+            }
+          }
+        }
+        console.log(
+          "Total experience: " +
+            parseInt(totalExp / 12) +
+            " years and " +
+            (totalExp % 12) +
+            " months"
+        );
+        console.log("All companies worked at:");
+        companies.forEach(function (value, key) {
+          console.log(
+            key +
+              " = " +
+              parseInt(value / 12) +
+              " years and " +
+              (value % 12) +
+              " months"
+          );
+        });
+        console.log("All skills:");
+        skills.forEach(function (value, key) {
+          console.log(
+            key +
+              " = " +
+              parseInt(value / 12) +
+              " years and " +
+              (value % 12) +
+              " months"
+          );
+        });
+        checkOverlapingProjects();
+
+        printContactDetails();
+        printSkills();
+        printEducation();
+        printName();
+        printTitle();
+        printAboutMe();
+        printProjects();
+        printATSMetadata();
+      }
+
+      // Function to add hidden technology keywords for ATS parsing
+      function printATSMetadata() {
+        var technologies = [];
+
+        // First, use all technologies from metadata file if available
+        if (
+          typeof technologiesMetadata !== "undefined" &&
+          technologiesMetadata.all
+        ) {
+          technologies = technologiesMetadata.all.slice(); // Copy the array
+        } else {
+          // Fallback: Collect all skills from config
+          for (var skill of cvConfig.skills) {
+            technologies.push(skill.name);
+          }
+
+          // Collect all skills from work experience
+          for (var xp of cvConfig.experience) {
+            for (var skill of xp.skills) {
+              if (technologies.indexOf(skill) === -1) {
+                technologies.push(skill);
+              }
+            }
+          }
+        }
+
+        // Create hidden metadata text
+        var metadataText = technologies.join(" ");
+
+        // Log to console for debugging
+        console.log("=== ATS METADATA (Hidden Technology Keywords) ===");
+        console.log("Total technologies:", technologies.length);
+        console.log("Technologies list:", technologies);
+        console.log("Metadata text:", metadataText);
+        console.log("================================================");
+
+        // Add to hidden div
+        var metadataDiv = document.getElementById("atsMetadata");
+        if (metadataDiv) {
+          metadataDiv.textContent = metadataText;
+        }
+      }
+      const mainTimeout = setTimeout(main, 200); // wait for page to load
+
+      // Function to download resume as PDF
+      function downloadPDF() {
+        const element = document.querySelector(".main");
+        const name = cvConfig.name.replace(/\s+/g, "_");
+        const filename = "Resume_" + name + ".pdf";
+
+        const opt = {
+          margin: [0, 0, 0, 0],
+          filename: filename,
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            windowWidth: element.scrollWidth,
+            windowHeight: element.scrollHeight,
+          },
+          jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait",
+          },
+          pagebreak: {
+            mode: ["avoid-all", "css", "legacy"],
+            before: ".pageBreak",
+            avoid: [".project", ".shortInfoBlock", ".educationDetails"],
+          },
+        };
+
+        html2pdf().set(opt).from(element).save();
+      }
+    </script>
+    <style>
+      @media print {
+        .pageBreak {
+          page-break-before: always;
+          margin-bottom: 7mm;
+        }
+        .xp > .content > #projects > .project {
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+        .shortInfoBlock {
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+        .shortInfoBlock > .educationDetails {
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+      }
+      body,
+      html {
+        margin: 0px;
+        background-color: rgb(80, 80, 80);
+        font-variant-ligatures: none;
+
+        word-wrap: normal;
+        word-break: normal;
+        hyphens: none;
+      }
+      p {
+        white-space: pre-wrap;
+      }
+      .main {
+        width: 210mm;
+        height: inherit;
+        background-color: white;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+      }
+      .shortInfo {
+        width: 70mm;
+        background-color: rgb(48, 53, 56);
+        justify-content: center;
+      }
+      .xp {
+        width: 140mm;
+      }
+      .profileImg {
+        width: 70mm;
+        height: 70mm;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .profileImg > img {
+        width: 57mm;
+        height: 57mm;
+        border-radius: 100%;
+        border: 1mm;
+        border-color: rgb(205, 205, 205);
+        border-style: solid;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+      }
+      .shortInfoBlock {
+        margin: 0mm 7mm 7mm 7mm;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .shortInfoBlock > .title {
+        color: rgb(91, 194, 251);
+        border-bottom: 0.5mm solid rgb(91, 194, 251);
+      }
+      .shortInfoBlock > .title > span {
+        font-size: 13pt;
+        font-family: Calibri;
+        font-weight: bold;
+      }
+      .shortInfoBlock > .title > i {
+        margin-left: 1mm;
+        margin-right: 3mm;
+      }
+      .shortInfoBlock > .contactDetails {
+        color: white;
+        font-size: 11pt;
+        margin-top: 2mm;
+      }
+      .shortInfoBlock > .contactDetails:nth-child(2) {
+        margin-top: 3mm;
+      }
+      .shortInfoBlock > .contactDetails > i {
+        margin-left: 1mm;
+        margin-right: 3mm;
+        width: 5mm;
+      }
+      .shortInfoBlock > .contactDetails > span {
+        font-family: Carlito;
+      }
+      .shortInfoBlock > .contactDetails > span > a {
+        text-decoration: none;
+        color: white;
+      }
+      .shortInfoBlock > .skillDetails {
+        color: white;
+        font-family: Carlito;
+        font-size: 11pt;
+        margin: 0.5mm 1mm 0mm 1mm;
+        display: flex;
+        justify-content: space-between;
+      }
+      .shortInfoBlock > .skillDetails:nth-child(2) {
+        margin-top: 3mm;
+      }
+      .shortInfoBlock > .skillDetails > div:first-child {
+        flex: 1;
+      }
+      .shortInfoBlock > .skillDetails > div:last-child {
+        width: 14mm;
+      }
+      .shortInfoBlock > .educationDetails {
+        color: white;
+        font-family: Carlito;
+        font-size: 11pt;
+        margin: 5mm 1mm 0mm 1mm;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .shortInfoBlock > .educationDetails:nth-child(2) {
+        margin: 3mm 1mm 0mm 1mm;
+      }
+      .shortInfoBlock > .educationDetails > div:nth-child(1) {
+        font-weight: bolder;
+      }
+      .shortInfoBlock > .educationDetails > div:nth-child(2) {
+        margin-top: 1mm;
+      }
+      .shortInfoBlock > .educationDetails > div:nth-child(3) {
+        color: rgb(179, 179, 179);
+        margin-top: 1mm;
+      }
+      .xp > .title {
+        font-size: 32pt;
+        font-weight: bolder;
+        font-family: Yu Gothic UI;
+        text-align: center;
+        line-height: 22pt;
+        margin-top: 15mm;
+      }
+      .xp > .subtitle {
+        font-size: 11pt;
+        font-family: Calibri;
+        text-align: center;
+        margin-top: 3mm;
+      }
+      .xp > .content {
+        margin: 9mm 7mm 0mm 7mm;
+        background-color: white;
+      }
+      .xp > .content > .title {
+        margin: 9mm 0mm 0mm 0mm;
+        color: rgb(1, 93, 144);
+        font-family: Calibri;
+        font-size: 13pt;
+        font-weight: bolder;
+        border-bottom: 0.5mm solid black;
+        padding-bottom: 0.5mm;
+      }
+      .xp > .content > .title > i {
+        width: 6mm;
+      }
+      .xp > .content > #aboutMeSection > .normalText {
+        font-family: Carlito;
+        font-size: 11pt;
+        text-align: justify;
+        margin-top: 3mm;
+      }
+      .xp > .content > #aboutMeSection > .normalText > span {
+        font-weight: bolder;
+      }
+      .xp > .content > #projects > .project {
+        margin-top: 8mm;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .xp > .content > #projects > .project:first-child {
+        margin-top: 3mm;
+      }
+      .xp > .content > #projects > .project > .positionAndPeriod {
+        font-size: 11pt;
+        display: flex;
+        justify-content: space-between;
+      }
+      .xp
+        > .content
+        > #projects
+        > .project
+        > .positionAndPeriod
+        > span:first-child {
+        font-family: Tahoma;
+        font-weight: bolder;
+      }
+      .xp
+        > .content
+        > #projects
+        > .project
+        > .positionAndPeriod
+        > span:last-child {
+        font-family: Calibri;
+      }
+      .xp > .content > #projects > .project > .period {
+        font-family: Calibri;
+        font-size: 11pt;
+      }
+      .xp > .content > #projects > .project > .titleAndCompany {
+        font-family: Carlito;
+        font-size: 11pt;
+        font-style: italic;
+        margin-top: 3mm;
+      }
+      .xp > .content > #projects > .project > .description {
+        font-family: Carlito;
+        font-size: 11pt;
+        text-align: justify;
+        margin-top: 3mm;
+        margin-bottom: 0px;
+      }
+      .xp > .content > #projects > .project > ul.impact {
+        font-family: Carlito;
+        font-size: 11pt;
+        margin: 0px;
+        padding-left: 10mm;
+      }
+      .xp > .content > #projects > .project > ul.impact > li > p {
+        margin-top: 3mm;
+        text-align: justify;
+        margin-bottom: 0px;
+      }
+      .xp > .content > #projects > .project > ul.impact > li > p > span {
+        font-weight: bolder;
+      }
+      .xp > .content > #projects > .project > .skills {
+        font-family: Carlito;
+        font-size: 11pt;
+        margin-top: 3mm;
+        text-align: justify;
+      }
+      .downloadButton {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: rgb(91, 194, 251);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 14pt;
+        font-family: Calibri;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background-color 0.3s;
+      }
+      .downloadButton:hover {
+        background-color: rgb(70, 174, 231);
+      }
+      .downloadButton:active {
+        background-color: rgb(50, 154, 211);
+      }
+      /* Hidden metadata for ATS parsing - visible to resume scanners but not to humans */
+      .atsMetadata {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      @media print {
+        .downloadButton {
+          display: none;
+        }
+        .atsMetadata {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="downloadButton" onclick="downloadPDF()">
+      <i class="fa-solid fa-download"></i>
+      Download PDF
+    </button>
+    <div class="main">
+      <div class="shortInfo">
+        <div class="profileImg"><img src="img/profile.jpg" /></div>
+        <div class="shortInfoBlock" id="contact">
+          <div class="title">
+            <i class="fa-solid fa-bars"></i><span>CONTACT</span>
+          </div>
+          <div class="contactDetails" id="whatsapp">
+            <i class="fa-brands fa-whatsapp"></i
+            ><span><a target="_blank"></a></span>
+          </div>
+          <div class="contactDetails" id="telegram">
+            <i class="fa-brands fa-telegram"></i
+            ><span><a target="_blank"></a></span>
+          </div>
+          <div class="contactDetails" id="email">
+            <i class="fa-solid fa-envelope"></i><span><a></a></span>
+          </div>
+          <div class="contactDetails" id="linkedin">
+            <i class="fa-brands fa-linkedin"></i
+            ><span><a target="_blank"></a></span>
+          </div>
+          <div class="contactDetails" id="medium">
+            <i class="fa-brands fa-medium"></i
+            ><span><a target="_blank"></a></span>
+          </div>
+          <div class="contactDetails" id="github">
+            <i class="fa-brands fa-github"></i
+            ><span><a target="_blank"></a></span>
+          </div>
+          <div class="contactDetails" id="location">
+            <i class="fa-solid fa-location-dot"></i><span></span>
+          </div>
+          <!-- I don't use Skype anymore, don't uncomment this -->
+          <!-- <div class="contactDetails" id="skype"><i class="fa-brands fa-skype"></i></i><span><a target="_blank"></a></span></div> -->
+        </div>
+        <div class="shortInfoBlock" id="skills">
+          <div class="title">
+            <i class="fa-solid fa-gear"></i><span>SKILLS</span>
+          </div>
+        </div>
+        <div class="shortInfoBlock" id="education">
+          <div class="title">
+            <i class="fa-solid fa-graduation-cap"></i><span>EDUCATION</span>
+          </div>
+        </div>
+      </div>
+      <div class="xp">
+        <div class="title" id="name"></div>
+        <div class="subtitle" id="expertise"></div>
+        <div class="content">
+          <div class="title">
+            <i class="fa-solid fa-user"></i><span>ABOUT ME</span>
+          </div>
+          <div id="aboutMeSection"></div>
+          <div class="title">
+            <i class="fa-solid fa-briefcase"></i><span>WORK EXPERIENCE</span>
+          </div>
+          <div id="projects"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Hidden metadata for ATS parsing - contains all technology keywords -->
+    <div id="atsMetadata" class="atsMetadata" aria-hidden="true"></div>
+  </body>
+</html>

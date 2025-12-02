@@ -1,0 +1,252 @@
+================================================================================
+RESUME GENERATOR - FILL IN TEMPLATE
+================================================================================
+Fill in all sections below. When done, save this file and provide it to update
+your resume. Make sure dates don't overlap between work experiences.
+
+================================================================================
+PERSONAL INFORMATIONw
+================================================================================
+
+NAME: 
+Alexandru Sirghie
+
+TITLE (separate multiple titles with |):
+Senior AI Engineer React & Python | Contractor | Freelancer
+
+================================================================================
+CONTACT INFORMATION
+================================================================================
+
+PHONE: 
++40 751 496765
+
+EMAIL: 
+alex.sirghie.dev@gmail.com
+
+LOCATION: 
+Bucharest, România
+
+LINKEDIN: 
+@alexandru-sirghie
+
+SKYPE: 
+Alexandru Sirghie
+
+SKYPE LINK: 
+https://join.skype.com/invite/L8J5TTHSDGKX
+
+================================================================================
+ABOUT ME
+================================================================================
+[Write 2-4 paragraphs about yourself. Use **text** for bold text and regular text for normal text.
+Each paragraph should be on a new line starting with PARAGRAPH:]
+
+PARAGRAPH 1: 
+I am a Senior AI Engineer (React & Python) / contractor / freelancer with **8+ years of experience**, only interested in remote work.
+
+PARAGRAPH 2: 
+I use my expertise, skills, and passion to design and implement top-of-the-line AI-powered software solutions for companies worldwide.
+
+PARAGRAPH 3: 
+**Drop me a message** if you think my expertise could help your organization!
+
+================================================================================
+SKILLS
+================================================================================
+[Enter one skill per line. The system will automatically calculate years of experience based on your work history.]
+
+SKILLS:
+React 8 years
+Python 6 years
+JavaScript 8 years
+Typescript 8 years
+FastAPI 6 years
+Flusk 6 years
+Node.js 6 years
+Azure 3 years
+RAG 4 years
+Microservices 6 years
+AWS 4 years
+Jenkins 8 years
+Docker 3 years
+Git 8 years
+Agile 8 years
+
+SKILLS YEARS ROUND AT MONTHS: 
+8
+
+================================================================================
+EDUCATION
+================================================================================
+[Enter each education entry. Use --- to separate entries]
+
+EDUCATION 1:
+UNIVERSITY: University of Art & Design
+DEGREE: Masters in Art & Design
+LOCATION AND YEARS: Cluj Napoca, 2016 - 2018 
+
+---
+
+EDUCATION 2:
+UNIVERSITY: University of Art & Design 
+DEGREE: Bachelor in Art & Design
+LOCATION AND YEARS: Cluj Napoca, 2013 - 2016
+
+================================================================================
+WORK EXPERIENCE
+================================================================================
+[Enter each work experience. Use === to separate entries.
+IMPORTANT: Make sure dates don't overlap! Leave at least 1 month gap between projects.
+Format dates as: MONTH YEAR (e.g., "February 2024" or "2 2024" for month number)]
+
+=== EXPERIENCE 1 ===
+
+PAGE BREAK: no
+
+POSITION: Senior AI Engineer React & Python
+
+START DATE: 2 2024
+END DATE: Present
+
+PROJECT NAME: Global Financial Company
+
+COMPANY: Ernst & Young
+
+DESCRIPTION: 
+The client, a prominent global financial company, required the development of a new AI powered platform that streamlined operations and improved decision-making across client portfolios in the fintech sector.
+
+IMPACT POINT 1:
+BOLD TEXT: Reduced manual workload by 30-40%
+NORMAL TEXT:  with .NET microservices, Redis queues, and automated AI workflows.
+
+IMPACT POINT 2:
+BOLD TEXT: Reduced processing times by 25% and cut error rates by 15%
+NORMAL TEXT:  using Azure Functions, Azure ML, and RAG-based validation.
+
+IMPACT POINT 3:
+BOLD TEXT: Boosted report accuracy by 15% and sped investigations by 5%
+NORMAL TEXT:  using Azure Functions, Azure ML, and OpenSearch RAG.
+
+SKILLS: React, Python, .NET, Redis, Azure Functions, Azure ML, RAG, OpenSearch, Git, Agile
+
+=== EXPERIENCE 2 ===
+
+PAGE BREAK: no
+
+POSITION: AI Engineer React & Python
+
+START DATE: 4 2022
+END DATE: 2 2024
+
+PROJECT NAME: Online Betting Platform
+
+COMPANY: Betfair
+
+DESCRIPTION: 
+The client, a prominent online gambling company, needed new AI-enhanced features to strengthen their responsible gambling tools.
+
+IMPACT POINT 1:
+BOLD TEXT: Increased customer retention by 2×
+NORMAL TEXT:  with AI-driven behavior monitoring built on React, Python/Java services, AWS, and Jenkins.
+
+IMPACT POINT 2:
+BOLD TEXT: Cut KYC review time by 50%
+NORMAL TEXT:  with AI-driven identity checks and behavior monitoring on a modern cloud-native microservices platform.
+
+IMPACT POINT 3:
+BOLD TEXT: Dropped fraud cases by 40% (10/day → 6/day)
+NORMAL TEXT:  using AI-driven risk scoring and real-time monitoring.
+
+SKILLS: React, Python, Java, AWS, Jenkins, Git, Agile
+
+=== EXPERIENCE 3 ===
+
+PAGE BREAK: yes
+
+POSITION: React & Python Developer
+
+START DATE: 7 2021
+END DATE: 4 2022
+
+PROJECT NAME: Multinational Technology Company
+
+COMPANY: IBM
+
+DESCRIPTION: 
+The client, owner of a prominent retail chain in the USA, required the development of a new feature.
+
+IMPACT POINT 1:
+BOLD TEXT: Achieved 80% higher satisfaction for 10k+ users and increased subscription conversions by 2%
+NORMAL TEXT:  through an adaptive, optimized subscription experience.
+
+IMPACT POINT 2:
+BOLD TEXT: Increased upsell revenue by 18%
+NORMAL TEXT:  by deploying an intelligent product-recommendation engine that tailored offers to user behavior.
+
+IMPACT POINT 3:
+BOLD TEXT: Reduced manual support volume by 35%
+NORMAL TEXT:  by implementing an intelligent assistance layer that anticipated user needs in real time.
+
+SKILLS: React, Python, Git, Agile
+
+=== EXPERIENCE 4 ===
+
+PAGE BREAK: no
+
+POSITION: React & Python Developer
+
+START DATE: 5 2020
+END DATE: 8 2021
+
+PROJECT NAME: Online retail platform
+
+COMPANY: Throwpoint
+
+DESCRIPTION: 
+The client required development of an adaptive recommendation engine for their online retail platform.
+
+IMPACT POINT 1:
+BOLD TEXT: Sold an extra 300 products per day
+NORMAL TEXT:  through an adaptive recommendation engine with real-time profiling, dynamic ranking, and scalable data services.
+
+IMPACT POINT 2:
+BOLD TEXT: Achieved a 45% increase in homepage-to-checkout conversion
+NORMAL TEXT:  by using an AI-driven personalization engine.
+
+SKILLS: React, Python, Git, Agile
+
+=== EXPERIENCE 5 ===
+
+PAGE BREAK: no
+
+POSITION: React & Python/Node.js Developer
+
+START DATE: 1 2018
+END DATE: 5 2020
+
+PROJECT NAME: Web applications for e-commerce and SaaS
+
+COMPANY: Freelancing
+
+DESCRIPTION: 
+Delivered end-to-end web applications for e-commerce, SaaS, and small-business clients.
+
+IMPACT POINT 1:
+BOLD TEXT: Improved by 30% site performance and uptime reliability
+NORMAL TEXT:  for e-commerce, SaaS, and small-business clients by delivering end-to-end web applications.
+
+IMPACT POINT 2:
+BOLD TEXT: Improved with 35% load times
+NORMAL TEXT:  with responsive React front-ends and scalable Node.js/Python APIs supporting high-traffic deployments.
+
+IMPACT POINT 3:
+BOLD TEXT: Boosted client conversion rates
+NORMAL TEXT:  by reducing average page load times by 40% through UX and performance optimizations.
+
+SKILLS: React, Python, Node.js, Git, Agile
+
+================================================================================
+END OF TEMPLATE
+================================================================================
+

@@ -1,0 +1,161 @@
+================================================================================
+RESUME GENERATOR - FILL IN TEMPLATE
+================================================================================
+Fill in all sections below. When done, save this file and provide it to update
+your resume. Make sure dates don't overlap between work experiences.
+
+================================================================================
+PERSONAL INFORMATION
+================================================================================
+
+NAME: 
+[Enter your full name, e.g., "JOHN DOE"]
+
+TITLE (separate multiple titles with |):
+[Enter your professional titles, e.g., "Senior Software Engineer | Contractor | Freelancer"]
+[You can have multiple titles separated by |]
+
+================================================================================
+CONTACT INFORMATION
+================================================================================
+
+PHONE: 
+[Enter phone number, e.g., "+1 234 567 8900"]
+
+EMAIL: 
+[Enter email address, e.g., "john.doe@email.com"]
+
+LOCATION: 
+[Enter location, e.g., "New York, USA"]
+
+LINKEDIN: 
+[Enter LinkedIn profile path, e.g., "in/john-doe" (without https://linkedin.com/)]
+
+SKYPE: 
+[Enter Skype name, e.g., "John Doe"]
+
+SKYPE LINK: 
+[Enter full Skype link, e.g., "https://join.skype.com/invite/..."]
+
+================================================================================
+ABOUT ME
+================================================================================
+[Write 2-4 paragraphs about yourself. Use **text** for bold text and regular text for normal text.
+Each paragraph should be on a new line starting with PARAGRAPH:]
+
+PARAGRAPH 1: 
+[Example: "I am a Senior Software Engineer with **10+ years of experience**, only interested in remote work."]
+
+PARAGRAPH 2: 
+[Example: "I use my expertise, skills, and passion to design and implement top-of-the-line software solutions for companies worldwide."]
+
+PARAGRAPH 3: 
+[Example: "**Drop me a message** if you think my expertise could help your organization!"]
+
+================================================================================
+SKILLS
+================================================================================
+[Enter one skill per line. The system will automatically calculate years of experience based on your work history.]
+
+SKILLS:
+React
+Python
+JavaScript
+Node.js
+AWS
+Docker
+Git
+Agile
+[Add more skills as needed, one per line]
+
+SKILLS YEARS ROUND AT MONTHS: 
+[Enter number (default: 8). Skills with X months will round up to the next year if X >= this number]
+
+================================================================================
+EDUCATION
+================================================================================
+[Enter each education entry. Use --- to separate entries]
+
+EDUCATION 1:
+UNIVERSITY: [University name]
+DEGREE: [Degree name, e.g., "MA in Computer Science"]
+LOCATION AND YEARS: [e.g., "New York, 2015 - 2017"]
+
+---
+
+EDUCATION 2:
+UNIVERSITY: [University name]
+DEGREE: [Degree name, e.g., "BA in Computer Science"]
+LOCATION AND YEARS: [e.g., "New York, 2011 - 2015"]
+
+[Add more education entries as needed, separated by ---]
+
+================================================================================
+WORK EXPERIENCE
+================================================================================
+[Enter each work experience. Use === to separate entries.
+IMPORTANT: Make sure dates don't overlap! Leave at least 1 month gap between projects.
+Format dates as: MONTH YEAR (e.g., "February 2024" or "2 2024" for month number)]
+
+=== EXPERIENCE 1 ===
+
+PAGE BREAK: [yes/no - whether to add a page break before this entry]
+
+POSITION: [Job title, e.g., "Senior Software Engineer"]
+
+START DATE: [Month Year, e.g., "February 2024" or "2 2024"]
+END DATE: [Month Year, e.g., "December 2024" or "12 2024" - use "Present" for current job]
+
+PROJECT NAME: [Project or role name, e.g., "Global Financial Company"]
+
+COMPANY: [Company name, e.g., "Ernst & Young"]
+
+DESCRIPTION: 
+[Client/project description, e.g., "The client, a prominent global financial company, required the development of a new AI powered platform that streamlined operations and improved decision-making across client portfolios in the fintech sector."]
+
+IMPACT POINT 1:
+BOLD TEXT: [The bold part of the impact, e.g., "Reduced manual workload by 30-40%"]
+NORMAL TEXT: [The rest of the impact, e.g., " with .NET microservices, Redis queues, and automated AI workflows."]
+
+IMPACT POINT 2:
+BOLD TEXT: [e.g., "Reduced processing times by 25% and cut error rates by 15%"]
+NORMAL TEXT: [e.g., " using Azure Functions, Azure ML, and RAG-based validation."]
+
+IMPACT POINT 3:
+BOLD TEXT: [Add more impact points as needed]
+NORMAL TEXT: 
+
+SKILLS: [Comma-separated list, e.g., "React, Python, .NET, Redis, Azure Functions, Git, Agile"]
+
+=== EXPERIENCE 2 ===
+
+PAGE BREAK: [yes/no]
+
+POSITION: [Job title]
+
+START DATE: [Month Year]
+END DATE: [Month Year or "Present"]
+
+PROJECT NAME: [Project or role name]
+
+COMPANY: [Company name]
+
+DESCRIPTION: 
+[Client/project description]
+
+IMPACT POINT 1:
+BOLD TEXT: 
+NORMAL TEXT: 
+
+IMPACT POINT 2:
+BOLD TEXT: 
+NORMAL TEXT: 
+
+SKILLS: [Comma-separated list]
+
+[Continue adding more experiences as needed, each separated by ===]
+
+================================================================================
+END OF TEMPLATE
+================================================================================
+

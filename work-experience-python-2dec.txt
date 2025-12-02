@@ -1,0 +1,30 @@
+| Role | Dates | Client Description | Refactored Text 1 DEC |
+| --- | --- | --- | --- |
+|  **Senior AI Engineer** React & Python 
+( Global Financial Company | @Ernst & Young ) | February 2024 - To present | The client, a prominent global financial company, required the development of a new an AI powered platform that streamlined operations and improved decision-making across client portfolios in the fintech sector. | Reduced manual workload by 30-40% with .NET microservices, Redis queues, and automated AI workflows.
+
+Reduced processing times by 25% and cut error rates by 15% using **Azure Functions**, **Azure ML**, and **RAG-based validation**.
+
+Boosted report accuracy by 15% and sped investigations by 5% using Azure Functions, Azure ML, and OpenSearch RAG. |
+| **AI Engineer React & Python** 
+( Online Betting Platform | @Betfair) | April 2022 - February 2024 | The client, a prominent online gambling company, needed new AI-enhanced features to strengthen their responsible gambling tools. | Increased customer retention by 2× with AI-driven behavior monitoring built on React, Python/Java services, AWS, and Jenkins.
+
+Cut KYC review time by 50% with AI-driven identity checks and behavior monitoring on a modern cloud-native microservices platform.
+
+Dropped fraud cases by 40% (10/day → 6/day) using AI-driven risk scoring and real-time monitoring. |
+| **React & Python Developer** 
+( Online Retail Platform | @IBM ) | July 2021 - April 2022 | The client, owner of a prominent retail chain in the USA, required the development of a new feature. | Achieved 80% higher satisfaction for 10k+ users and increased subscription conversions by 2% through an adaptive, optimized subscription experience.
+
+Increased upsell revenue by 18% by deploying an intelligent product-recommendation engine that tailored offers to user behavior.
+
+Reduced manual support volume by 35% by implementing an intelligent assistance layer that anticipated user needs in real time. |
+| **React & Python Developer** 
+(Online Retail Platform | @Throwpoint) | May 2020 - August 2021 |  | Sold an extra 300 products per day through an adaptive recommendation engine with real-time profiling, dynamic ranking, and scalable data services.
+
+Achieved a 45% increase in homepage-to-checkout conversion by using an AI-driven personalization engine. |
+| React & Python/Node.js
+(Freelancing) | January 2018 - May 2020 |  | Improved by 30% site performance and uptime reliability for e-commerce, SaaS, and small-business clients by delivering end-to-end web applications.
+
+Improved with 35% load times with responsive React front-ends and scalable Node.js/Python APIs supporting high-traffic deployments.
+
+By reducing average page load times by 40%, boosted client conversion rates through UX and performance optimizations. |
